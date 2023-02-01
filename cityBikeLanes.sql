@@ -19,3 +19,18 @@ SELECT
     rating,
     'Safe Lane' AS label
 FROM safetyTableCTE;
+
+-- Get street, safety rating by both techs, avg safety rating for the street, and then label for project status
+-- >= 4 = leave as is
+-- <= 2.5 = remove
+
+SELECT 
+    street,
+    safetyrating,
+    AVG(safetyrating) OVER(PARTITION BY street) AS 'avg safety rating',
+    CASE
+        WHEN AVG(safetyrating) OVER(PARTITION BY safetyrating) >= 4 THEN 'Leave As-Is'
+        WHEN AVG(safetyrating) OVER(PARTITION BY safetyrating) < 2.5 THEN 'Remove'
+        ELSE 'Improvements Needed'
+    END AS 'recommendation'
+FROM CityBikeLanes;
