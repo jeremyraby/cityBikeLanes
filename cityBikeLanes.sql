@@ -25,12 +25,12 @@ FROM safetyTableCTE;
 -- <= 2.5 = remove
 
 SELECT 
-    street,
-    safetyrating,
-    AVG(safetyrating) OVER(PARTITION BY street) AS 'avg safety rating',
-    CASE
-        WHEN AVG(safetyrating) OVER(PARTITION BY safetyrating) >= 4 THEN 'Leave As-Is'
-        WHEN AVG(safetyrating) OVER(PARTITION BY safetyrating) < 2.5 THEN 'Remove'
-        ELSE 'Improvements Needed'
-    END AS 'recommendation'
+street, 
+safetyrating,
+AVG(safetyrating) OVER (PARTITION BY street) as "Average Safety Rating",
+CASE 
+    WHEN AVG(safetyrating) OVER (PARTITION BY street) >=4 THEN "Leave As-Is"
+    WHEN AVG(safetyrating) OVER (PARTITION BY street) <2.5 THEN "Remove"
+    ELSE "Improvements Needed"
+    END AS "Recommendation"
 FROM CityBikeLanes;
