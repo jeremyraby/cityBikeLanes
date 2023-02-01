@@ -11,3 +11,6 @@ This is a collection of queries written for the City Bike Lanes project as part 
 - ORDER BY
 - Aggregate Functions
   - AVG
+- Window functions
+  - OVER
+  - PARTITION BY
