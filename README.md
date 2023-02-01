@@ -14,3 +14,4 @@ This is a collection of queries written for the City Bike Lanes project as part 
 - Window functions
   - OVER
   - PARTITION BY
+- CASE
